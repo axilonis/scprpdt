@@ -3,587 +3,94 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Facility-03 "Black Dagger"</title>
-    <link rel="icon" type="image" href="blackdagger1.png">
+    <title>Command Prompt</title>
     <style>
-        body::before {
-            content: "";
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('image.png') no-repeat center center fixed;
-            background-size: cover;
-            opacity: 0.1;
-            z-index: -1;
-        }
         body {
-            font-family: Arial, sans-serif;
-            background-color: #111111;
-            color: #E0E0E0;
-            margin: 0;
-            padding: 0;
+            background-color: black;
+            color: rgb(255, 255, 255);
+            font-family: monospace;
+            padding: 20px;
+            font-size: 16px;
+        }
+        #output {
+            white-space: pre-wrap;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+        #input-line {
             display: flex;
+            font-size: 16px;
         }
-        .sidebar {
-            width: 150px;
-            background: #1A1A1A;
-            padding: 20px;
-            height: 100vh;
-            position: fixed;
-        }
-        .sidebar h2 {
-            color: #2b5fc0;
-            margin-bottom: 5px;
-        }
-        .sidebar p {
-            color: #E0E0E0;
-            font-size: 14px;
-            margin-bottom: 20px;
-        }
-        .sidebar ul {
-            list-style: none;
-            padding: 0;
-        }
-        .sidebar ul li {
-            margin: 15px 0;
-        }
-        .sidebar ul li a {
-            color: #E0E0E0;
-            text-decoration: none;
-            cursor: pointer;
-        }
-        .content {
-            margin-left: 210px;
-            padding: 20px;
-            width: calc(100% - 270px);
-        }
-        .news-box, .archive-box, .about-box, .welcome-box, .news-box1{
-            background: #1A1A1A;
-            padding: 20px;
-            border-radius: 5px;
-            margin-bottom: 20px;
-        }
-
-        .gallery-box{
-            background: #1A1A1A;
-            padding: 20px;
-            border-radius: 5px;
-            margin-bottom: 20px;
-            width: 71%;
-        }
-
-        .welcome-box {
-            height: 200px;
-            font-size: 20px;
-        }
-        .news-box {
-            height: 100px;
-            font-size: 20px;
-        }
-        .news-box1 {
-            height: 125px;
-            font-size: 20px;
-        }
-
-        .archive-box {
-            padding: 7px;
-            margin-bottom: 7px;
-            width: 98%;
-            text-align: left;
-            margin-left: 0px;
-        }
-
-        .archive-box a {
-            color: #2b5fc0;
-            text-decoration: none;
-            font-size: 18px;
-        }
-        .about-box {
-            text-align: left;
-            font-size: 17px;
-            padding: 10px;
-        }
-        .small-image {
-            width: 550px; 
-            height: auto;
-            margin-right: 1px;
-            margin-top: -212px;
-            float: right; 
-        }
-        .popup-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-        }
-        .popup {
-            background: #1A1A1A;
-            padding: 20px;
-            border-radius: 10px;
-            text-align: center;
-            color: #E0E0E0;
-            width: 300px;
-        }
-        .popup button {
-            background: #2b5fc0;
-            color: white;
+        #input {
+            background: none;
             border: none;
-            padding: 10px 20px;
-            cursor: pointer;
-            border-radius: 5px;
-            margin-top: 10px;
+            color: rgb(255, 255, 255);
+            font-family: monospace;
+            outline: none;
+            width: 100%;
+            font-size: 16px;
         }
-        .gallery {
-            width: 1150px; 
-            height: auto;
-            margin-right: 1px;
-            margin-top: 0px;
-            float: left; 
+        #prompt {
+            flex-shrink: 0;
         }
-
-        .gallery-box {
-            padding: 50px;
-        }
-
-        .news-box, .archive-box, .about-box, .welcome-box, .news-box1{
-            transition: transform 0.2s ease-in-out;
-        }
-
-        .news-box:hover, .archive-box:hover, .about-box:hover, .welcome-box:hover, .news-box1:hover {
-            transform: scale(1.03);
-        }
-
-        .blackdagger {
-            width: 450px; 
-            height: auto;
-            margin-right: -21px;
-            margin-top: 25px;
-            float: right; 
-            opacity: 0.1;
-            z-index: -2;
-        }
-
-        .discord {
-            position: absolute;
-            bottom: 0;
-            left: 1;
-            margin-bottom: 65px;
-        }
-
-        .anderson-cover {
-            position: relative;
-            background: linear-gradient(to right, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.2)), 
-            url('anderson.png') no-repeat center center;
-            background-size: cover;
-            padding: 20px;
-            border-radius: 5px;
-            color: white;
-        }
-
-        .gru-cover {
-            position: relative;
-            background: linear-gradient(to right, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.2)), 
-            url('grubg.png') no-repeat center center;
-            background-size: cover;
-            padding: 20px;
-            border-radius: 5px;
-            color: white;
-        }
-
-        .anderson-cover, .about-box, .gru-cover{
-            position: relative;
-            z-index: 2;
-        }
-
-        .anderson-icon {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            width: 100px;
-            height: auto;
-        }
-
-        .gru-icon {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            width: 100px;
-            height: auto;
-        }
-
-        .department-icon {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            width: 100px;
-            height: auto;
-        }
-
-        .ts-cover {
-            position: relative;
-            background: linear-gradient(to right, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.2)), 
-            url('tsicon.png') no-repeat center center;
-            background-size: cover;
-            padding: 20px;
-            border-radius: 5px;
-            color: white;
-        }
-
-        .sced-cover {
-            position: relative;
-            background: linear-gradient(to right, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.2)), 
-            url('scedicon.png') no-repeat center center;
-            background-size: cover;
-            padding: 20px;
-            border-radius: 5px;
-            color: white;
-        }
-
-        .medical-cover {
-            position: relative;
-            background: linear-gradient(to right, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.2)), 
-            url('medicalicon.png') no-repeat center center;
-            background-size: cover;
-            padding: 20px;
-            border-radius: 5px;
-            color: white;
-        }
-
-        .fets-cover {
-            position: relative;
-            background: linear-gradient(to right, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.2)), 
-            url('fetsicon.png') no-repeat center center;
-            background-size: cover;
-            padding: 20px;
-            border-radius: 5px;
-            color: white;
-        }
-
-        .fms-cover {
-            position: relative;
-            background: linear-gradient(to right, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.2)), 
-            url('fmsicon.png') no-repeat center center;
-            background-size: cover;
-            padding: 20px;
-            border-radius: 5px;
-            color: white;
-        }
-
-        .acns-cover {
-            position: relative;
-            background: linear-gradient(to right, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.2)), 
-            url('acnsicon.png') no-repeat center center;
-            background-size: cover;
-            padding: 20px;
-            border-radius: 5px;
-            color: white;
-        }
-
-
     </style>
-    <script>
-        function showPage(page) {
-            document.getElementById('home').style.display = 'none';
-            document.getElementById('archive').style.display = 'none';
-            document.getElementById('departments').style.display = 'none';
-            document.getElementById('staff').style.display = 'none';
-            document.getElementById('factions').style.display = 'none';
-            document.getElementById(page).style.display = 'block';
-        }
-        function closePopup() {
-            document.getElementById('popup-overlay').style.display = 'none';
-        }
-        window.onload = function() {
-            showPage('home');
-        }
-    </script>
 </head>
 <body>
-    <div class="popup-overlay" id="popup-overlay">
-        <div class="popup">
-            <p>Warning! The most optimal method of viewing this website is in a normal browser tab using a computer or laptop. Expect insane bugs on mobile. Sorry!</p>
-            <button onclick="closePopup()">ok :(</button>
-        </div>
-    </div>
+    <div id="output">Microsoft SCP:RP Database Terminal Disk Operating System [Version 10.0.26100.3476] <br>(c) SCP:RP Corporation. All rights reserved. <br>
 
-    <div class="sidebar">
-        <h2>Facility-03</h2>
-        <ul>
-            <li><a onclick="showPage('home')">Home</a></li>
-            <li><a onclick="showPage('archive')">Archive</a></li>
-            <li><a onclick="showPage('departments')">Departments</a></li>
-            <li><a onclick="showPage('staff')">Staff Forms</a></li>
-            <li><a onclick="showPage('factions')">Factions</a></li>
-            <img src="blackdagger1.png" alt="" class="blackdagger">
-            <li><a href="https://discord.gg/kSyrX5cjXM" class="discord">Discord</a></li>
-        </ul>
-    </div>
-    <div class="content">
-        <div id="home">
-            <h1>Welcome! This is the official Facility-03 "Black Dagger" Database </h1>
-            <div class="welcome-box">This website has been made to organise everything regarding lore and site information, so users don't have to <br>frantically search our Discord server for the correct channels that contain the information they desire to know. <br>The website may not have everything, but it has the most important things users may want to know. It is still <br>under heavy construction, so expect changes in the near future. As of now it looks simple and empty, but that <br>may soon change.<br><br>Happy browsing! -- axilonis
-            <img src="andrew-crying.png" alt="" class="small-image">
-            </div>
-            <h1>News & Announcements</h1>
-            <div class="news-box">30/03/2025 <br>19:00 UTC <br> <br>> Small announcement from me - School will get a bit busy for me again until easter I think, and I might not be able to make quick changes to the website if anybody desires during the week. Please be patient, as I will eventually fulfill all of your requests if needed. I will let you guys know when I will be more free.</div>
-            <div class="news-box">30/03/2025 <br>19:00 UTC <br> <br>> QoL Update #1</div>
-            <div class="news-box">30/03/2025 <br>18:00 UTC <br> <br>> GRU Division "P" and Anderson Robotics have been added to the factions tab, congrats on being the first ones!</div>
-            <div class="news-box">29/03/2025 <br>13:40 UTC <br> <br>> Thank you for the feedback! Grammar has been updated in general</div>
-            <div class="news-box">29/03/2025 <br>09:48 UTC <br> <br>> Website has been uploaded to the public</div>
-            <div class="news-box">28/03/2025 <br>05:50 UTC <br> <br>> EDCE Legal Codes and Site Protocols have been made</div>
-            <div class="news-box">26/03/2025 <br>18:00 UTC <br> <br>> Wicketderewok Q&A</div>
-            <div class="news-box">25/03/2025 <br>13:47 UTC <br> <br>> Faction Hub has been created</div>
-            <div class="news-box">25/03/2025 <br>10:39 UTC <br> <br>> Files have been uploaded to GitHub, the website is now being succesfully hosted using GitHub and anyone can access it using the link</div>
-            <div class="news-box">20/03/2025 <br>19:24 UTC <br> <br>> Development for this website has begun</div>
-        </div>
-        <div id="archive" style="display: none;">
-            <h1>Site Information</h1>
-            <div class="archive-box"><a href="https://docs.google.com/document/d/1BHoKZdijqbHUKskOg1IusZm3b2DdAvY6FfOdwmYaQ7g/edit?usp=sharing">Statute of the EDCE</a></div>
-            <div class="archive-box"><a href="https://docs.google.com/document/d/1Yotf0Qvz3w4zLcxctTrUV4-tS_0t9b8ZZ8RZzjfXGCE/edit?usp=sharing">Facility-03 Coded Protocols</a></div>
-            <div class="archive-box"><a href="https://docs.google.com/document/d/1UPPsdxZIfidxagQFAUmpAWvO5TZLJcHi5MY9w_wRa3Y/edit?usp=drivesdk">Facility-03 Roleplay Information</a></div>
-            <h1>Anomalies</h1>
-            <div class="archive-box"><a href="https://docs.google.com/document/d/12VybqqF3xk2DanUEfqWNz_ztWKaKMWZp0GFiPKzV3p4/edit">AN-166</a></div>
-            <div class="archive-box"><a href="https://docs.google.com/document/d/1d9pePwGj_qnTRgbTVn2Xy4RD10NyVH2eIP4IzNHhoOI/edit?usp=drivesdk">AN-027</a></div>
-            <div class="archive-box"><a href="https://docs.google.com/document/d/1bS1zI0Ol5IKXQCp8vlohgJRv6rT-dxao/edit?usp=sharing&ouid=101609366160739451702&rtpof=true&sd=true">SCP-049</a></div>
-            <div class="archive-box"><a href="https://docs.google.com/document/d/17w2AvvWGPkdepn8uZ_lYpf1tkRuU5smAquuFNqTtebM/edit?usp=drivesdk">AN-006</a></div>
-            <div class="archive-box"><a href="https://docs.google.com/document/d/1hLHrfHHu7S9qTZw-z80II65Pt4fk4MbqNs6yLJyQYKc/edit?usp=sharing">AN-584</a></div>
-            <div class="archive-box"><a href="https://docs.google.com/document/d/1Mtl-c6WYKndowz5cANh11dgKrj_AQ2-E_EJ63U2bUfo/edit?usp=sharing">AN-139</a></div>
-            <div class="archive-box"><a href="https://docs.google.com/document/d/1nYEpV533yCREmKI-sem4Z95Ti0A-myCx4Cfef6ZElpM/edit?usp=sharing">AN-821</a></div>
-            <div class="archive-box"><a href="https://docs.google.com/document/d/1WGZA4sQyZsM5g1pq6EERnOMg-_tkqSZIMjnXYeqDHlo/edit?usp=drivesdk">AN-044</a></div>
-            <div class="archive-box"><a href="https://docs.google.com/document/d/14rEla0zQv2hOaLdAcmpbNmz6XKu49cHDfojwlF-5Sqg/edit?usp=drivesdk">AN-019</a></div>
-            <div class="archive-box"><a href="https://docs.google.com/document/d/1yjdk95cKnsu9zYv9q4I1dppcyRy92x10RrVLwpAPY7s/edit?usp=drivesdk">AN-498</a></div>
-            <div class="archive-box"><a href="https://docs.google.com/document/d/1Sk8p2Hcj5-BOAhjW-JEd-KfUMHv6WIf3Uyw5wl3FyrQ/edit?usp=drivesdk">AN-101</a></div>
-            <h1>Personnel</h1>
-            <div class="archive-box"><a href="https://docs.google.com/document/d/1PHCOV9DbfEK9WlsyBQqPfXS0ks_SZShEBuKiyIAdZps/edit?usp=sharing">Melvin Français</a></div>
-            <div class="archive-box"><a href="https://docs.google.com/document/d/1XDTfrmQuS8IByplhm4kK4vsnPv1lTydvAKjtVT9V_SI/edit?usp=drivesdk">Issah A. Eisenhower</a></div>
-            <div class="archive-box"><a href="https://docs.google.com/document/d/11AHHWUDzvvs5enapDKJ2PQcjwMFHDUo6zT3hS2CzUTU/edit?tab=t.0">Cole Matthews</a></div>
-            <div class="archive-box"><a href="https://docs.google.com/document/d/1O-qucMfyPtPdYwM9ggEySGHfCavF_SCIMM_UfOlYCmc/edit?usp=drivesdk">Andrei Mihai Povaliceanu (awaiting re-documentation)</a></div>
-        </div>
-        <div id="staff" style="display: none;">
-            <h1>Discord Moderator</h1>
-            <div class="about-box">> Must have been on the server for a week <br>> Must have not been banned before <br>> Must be professional <br>> Must be active <br><br>Tip: Try not to get bribed or have favorites</div>
-            <div class="archive-box"><a href="https://forms.gle/ZaTh9UsFm4aLyBVJ8">Application Form</a></div>
-            <br>
-            <br>
+Available Commands:                                                                              Available Databases:
+inbox = update-log/pending messages                                                              type-site    | Facility-03 "Black Dagger"     = fbg
+info = shows you information about a specific database                                           
+depth = shows you even more about a specific subdata
+archive = shows you all available documents of a specific database
+div = shows you all the available departments/divisions of a specific database
+factions = shows you all available factions of a specific database (type-site only)
+socials = shows you all available socials of a specific database
 
-            <h1>Anomaly Actor</h1>
-            <div class="about-box">> Must have been on the server for a week <br>> Must have attended at least 3 sessions <br>> Must be professional <br>> Must be active and creative<br><br>Tip: Don't make unrealistic anomalies and don't abuse your perms</div>
-            <div class="archive-box"><a href="https://forms.gle/MreypmYUianiDoLC7">Application Form</a></div>
-            <br>
-            <br>
+database normal view format: [command] [database]
+database depth view format: depth [subdata-database]
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+</div>
+    <div id="input-line"><span id="prompt">C:\\Users\\LocalAccount&gt; </span><input id="input" autofocus></div>
 
-            <h1>Session Moderator</h1>
-            <div class="about-box">> Must have been on the server for a week <br>> Must have attended at least 5 sessions <br>> Must be professional <br>> Must be active<br><br>Tip: Don't abuse your perms, please don't, know your perms very well please i beg you</div>
-            <div class="archive-box"><a href="https://forms.gle/MreypmYUianiDoLC7">Application Form</a></div>
-            <br>
-            <br>
+    <script>
+        const database = {
+            'inbox fbg': 'Empty',
+            'info fbg': '<br>---SITE INFORMATION---<br>Statute of NAAD                        https://docs.google.com/document/d/1BHoKZdijqbHUKskOg1IusZm3b2DdAvY6FfOdwmYaQ7g/edit?usp=sharing<br>Facility-03 Coded Protocols            https://docs.google.com/document/d/1Yotf0Qvz3w4zLcxctTrUV4-tS_0t9b8ZZ8RZzjfXGCE/edit?usp=sharing<br>Facility-03 Roleplay Information       https://docs.google.com/document/d/1UPPsdxZIfidxagQFAUmpAWvO5TZLJcHi5MY9w_wRa3Y/edit?usp=drivesdk<br>Facility-03 Lore Information 1         https://docs.google.com/document/d/1UPPsdxZIfidxagQFAUmpAWvO5TZLJcHi5MY9w_wRa3Y/edit?tab=t.vaqgwhaqxfmv<br>Facility-03 Lore Information 2         https://docs.google.com/document/d/17aZxqbcb1LMCNMHT5QtCIA-hZSRk-kmTmKcbBsRCGzc/edit?usp=sharing',
+            'archive fbg': '<br>---ANOMALIES---<br>AN-166                                 https://docs.google.com/document/d/12VybqqF3xk2DanUEfqWNz_ztWKaKMWZp0GFiPKzV3p4/edit<br>AN-027                                 https://docs.google.com/document/d/1d9pePwGj_qnTRgbTVn2Xy4RD10NyVH2eIP4IzNHhoOI/edit?usp=drivesdk<br>SCP-049                                https://docs.google.com/document/d/1bS1zI0Ol5IKXQCp8vlohgJRv6rT-dxao/edit?usp=sharing&ouid=101609366160739451702&rtpof=true&sd=true<br>AN-006                                 https://docs.google.com/document/d/17w2AvvWGPkdepn8uZ_lYpf1tkRuU5smAquuFNqTtebM/edit?usp=drivesdk<br>AN-584                                 https://docs.google.com/document/d/1hLHrfHHu7S9qTZw-z80II65Pt4fk4MbqNs6yLJyQYKc/edit?usp=sharing<br>AN-139                                 https://docs.google.com/document/d/1Mtl-c6WYKndowz5cANh11dgKrj_AQ2-E_EJ63U2bUfo/edit?usp=sharing<br>AN-821                                 https://docs.google.com/document/d/1nYEpV533yCREmKI-sem4Z95Ti0A-myCx4Cfef6ZElpM/edit?usp=sharing<br>AN-044                                 https://docs.google.com/document/d/1WGZA4sQyZsM5g1pq6EERnOMg-_tkqSZIMjnXYeqDHlo/edit?usp=drivesdk<br>AN-019                                 https://docs.google.com/document/d/14rEla0zQv2hOaLdAcmpbNmz6XKu49cHDfojwlF-5Sqg/edit?usp=drivesdk<br>AN-498                                 https://docs.google.com/document/d/1yjdk95cKnsu9zYv9q4I1dppcyRy92x10RrVLwpAPY7s/edit?usp=drivesdk<br>AN-101                                 https://docs.google.com/document/d/1Sk8p2Hcj5-BOAhjW-JEd-KfUMHv6WIf3Uyw5wl3FyrQ/edit?usp=drivesdk<br><br>---PERSONNEL---<br>Melvin Français                        https://docs.google.com/document/d/1PHCOV9DbfEK9WlsyBQqPfXS0ks_SZShEBuKiyIAdZps/edit?usp=sharing<br>Issah A. Eisenhower                    https://docs.google.com/document/d/1XDTfrmQuS8IByplhm4kK4vsnPv1lTydvAKjtVT9V_SI/edit?usp=drivesdk<br>Cole Matthews                          https://docs.google.com/document/d/11AHHWUDzvvs5enapDKJ2PQcjwMFHDUo6zT3hS2CzUTU/edit?tab=t.0<br>Andrei Mihai Povaliceanu               https://docs.google.com/document/d/1O-qucMfyPtPdYwM9ggEySGHfCavF_SCIMM_UfOlYCmc/edit?usp=drivesdk',
+            'div fbg':'<br>---HOSTILES---<br>[TS] Test Subjects<br><br>---COMBATANTS---<br>[SCED] Security & Containment Enforcement Division<br>[SCARRED] Specialized Counter-Anomaly Rapid Response & Enforcement Detachment<br><br>---PERSONNEL---<br>[ACNS] Anomaly Containment & Neutralization Sciences<br>[HTS] Health & Trauma Services<br>[FETS] Facility Engineering & Technical Services<br>[FMS] Facility Management Staff<br>[BFA] Board of Facility Administration',
+            'factions fbg':'Anderson Robotics<br>GRU Division “P”<br>Nu-7 "Hammer Down"',
+            'socials fbg':'Discord Server                https://discord.gg/kSyrX5cjXM<br>Faction Hub                   https://discord.gg/eAPUcB7Gp8<br>TS Server                     https://discord.gg/n8J35Zz6KM<br>SCED Server                   https://discord.gg/5KcjqDfFza<br>SCARRED Server                https://discord.gg/5KcjqDfFza<br>ACNS Server                   https://discord.gg/MRnjMtE8aS<br>HTS Server                    https://discord.gg/unZ25GZNay<br>FETS Server                   https://discord.gg/mYdvQr87vu<br>FMS Server                    https://discord.gg/Ng8e6PYVPq<br>Anderson Robotics             https://discord.gg/RpJ5b6Sgd4<br>GRU Division “P”              https://discord.gg/bqt2rE8qnf<br>Nu-7 "Hammer Down"            https://discord.gg/8ypwAcjzMM',
+            'depth ts-fbg':'Test subjects are, like the name suggests, the ones that will be used to test anomalies or do labor which has a high risk of killing EDCE personnel.<br>They know of their past, taken from prisons, either death row or without people that will miss them - This often makes them very volatile, so SCED is always allowed to use force.<br>Most ethical rules do not apply to them',
+            'depth sced-fbg':'So far the most popular department, they are general facility guards that ensure everything goes smoothly without issues<br>They are usually stationed at either checkpoints, TSC, or patrolling the hallways<br>They have full permission to use lethal force if anything threatens the safety of other personnel',
+            'depth scarred-fbg':'SCARRED are the equivalent of MTF, the only difference being is that they are permanently stationed at the site<br>They are usually equipped with heavy weaponry, and they will respond to any disruptencies or threats in the facility as quick as possible<br>Rarely seen in TSC',
+            'depth acns-fbg':'They are the researchers that conduct tests and contain anomalies<br>Their primary objective is to find ways to neutralize anomalies<br>They are not allowed to get past the stairs in TSC without a good reason',
+            'depth hts-fbg':'They are pretty much doctors and nurses<br>They are the ones who give out amnestics<br>They are allowed to conduct check-ups on personnel and give them medical assistance<br>They are not allowed to get past the stairs in TSC without a good reason',
+            'depth fets-fbg':'They are the facility engineers who repair broken objects<br>They are not allowed to get past the stairs in TSC without a good reason',
+            'depth fms-fbg':'They are the facility managers who supervise everything and manage things, not to be confused with BFA<br>They are the ones who raise alarms, make announcements, etc<br>Lower rank than BFA',
+            'depth bfa-fbg':'They are the facility administrators who supervise everything and make all decisions<br>They are the ones who raise alarms, make announcements, etc<br>They have full power and permission over everything',
+        };
 
-            <h1>Session Host</h1>
-            <div class="about-box">> Must have been on the server for a week <br>> Must have attended 6 Sessions <br>> Must be professional <br>> Must be active <br><br>Tip: Don't leave mid sessions</div>
-            <div class="archive-box"><a href="https://forms.gle/MreypmYUianiDoLC7">Application Form</a></div>
-        </div>  
+        const outputDiv = document.getElementById('output');
+        const inputField = document.getElementById('input');
 
-        <div id="departments" style="display: none;">
-            <div class="archive-box">> Small note; if you apply for a new department, you will be removed from your old one - Additionally, the information provided here is very broad, as most information is not available to the general public</div>
-            <br>
-            
-            <h1>Test Subjects [TS]</h1>
-            <div class="about-box">
-            <div class="ts-cover">> Test subjects are, like the name suggests, the ones that will be used to test anomalies or do labor which has a high risk of killing EDCE personnel
-                <br>> They know of their past, taken from prisons, either death row or without people that will miss them - This often makes them very volatile, so SCED is always allowed to use force 
-                <br>> Most ethical rules don't apply to them
-            </div>
-            </div>
-            <div class="archive-box"><a href="https://discord.gg/n8J35Zz6KM">Join Here</a></div>
-            <br>
-
-            <h1>Security & Containment Enforcement Division [SCED]</h1>
-            
-            <div class="about-box">
-                <div class="sced-cover">> So far the most popular department, they are general facility guards that ensure everything goes smoothly without issues
-                <br>> They are usually stationed at either checkpoints, TSC, or patrolling the hallways
-                <br>> They have full permission to use lethal force if anything threatens the safety of other personnel
-            </div>
-            </div>
-            <div class="archive-box"><a href="https://discord.gg/5KcjqDfFza">Join Here</a></div>
-            <br>
-
-            <h1>Specialized Counter-Anomaly Rapid Response & Enforcement Detachment [SCARRED]</h1>
-            <div class="about-box">
-            <div class="sced-cover">
-            > SCARRED are the equivalent of MTF, the only difference being is that they are permanently stationed at the site
-                <br>> They are usually equipped with heavy weaponry, and they will respond to any disruptencies or threats in the facility as quick as possible
-                <br>> Rarely seen in TSC
-            </div>
-            </div>
-            <div class="archive-box"><a href="https://discord.gg/5KcjqDfFza">Join Here</a></div>
-            <br>
-
-            <h1>Anomaly Containment & Neutralization Sciences [ACNS]</h1>
-            <div class="about-box">
-                <div class="acns-cover">> They are the researchers that conduct tests and contain anomalies
-                <br>> Their primary objective is to find ways to neutralize anomalies
-                <br>> They are not allowed to get past the stairs in TSC without a good reason
-            </div>
-            </div>
-            <div class="archive-box"><a href="https://discord.gg/MRnjMtE8aS">Join Here</a></div>
-            <br>
-
-            <h1>Health & Trauma Services [HTS]</h1>
-            <div class="about-box">
-                <div class="medical-cover">> They are pretty much doctors and nurses
-                <br>> They are the ones who give out amnestics
-                <br>> They are allowed to conduct check-ups on personnel and give them medical assistance
-                <br>> They are not allowed to get past the stairs in TSC without a good reason
-            </div>
-            </div>
-            <div class="archive-box"><a href="https://discord.gg/unZ25GZNay">Join Here</a></div>
-            <br>
-
-            <h1>Facility Engineering & Technical Services [FETS]</h1>
-            <div class="about-box">
-                <div class="fets-cover">> They are the facility engineers who repair broken objects
-                <br>> They are not allowed to get past the stairs in TSC without a good reason
-            </div>
-            </div>
-            <div class="archive-box"><a href="https://discord.gg/mYdvQr87vu">Join here</a></div>
-            <br>
-
-            <h1>Facility Management Staff [FMS]</h1>
-            <div class="about-box">
-                <div class="fms-cover">> They are the facility managers who supervise everything and manage things, not to be confused with BFA
-                <br>> They are the ones who raise alarms, make announcements, etc
-                <br>> Lower rank than BFA 
-            </div>
-            </div>
-            <div class="archive-box"><a href="https://discord.gg/Ng8e6PYVPq">Join here</a></div>
-            <br>
-
-            <h1>Board of Facility Administration [BFA]</h1>
-            <div class="about-box">> They are the facility administrators who supervise everything and make all decisions
-                <br>> They are the ones who raise alarms, make announcements, etc
-                <br>> They have full power and permission over everything
-            </div>
-            <div class="archive-box"><a href="https://www.youtube.com/watch?v=xvFZjo5PgG0">Join here</a></div>
-        </div>
-
-        <div id="gallery" style="display: none;">
-            <h1>Gallery</h1>
-            <div class="gallery-box" style="height: 640px">
-                <img src="map.png" alt="" class="gallery">
-            </div>
-            <div class="gallery-box" style="height: 730px">
-                <img src="17.png" alt="" class="gallery">
-            </div>
-            <div class="gallery-box" style="height: 620px">
-                <img src="16.png" alt="" class="gallery">
-            </div>
-            <div class="gallery-box" style="height: 580px">
-                <img src="15.png" alt="" class="gallery">
-            </div>
-            <div class="gallery-box" style="height: 580px">
-                <img src="14.png" alt="" class="gallery">
-            </div>
-            <div class="gallery-box" style="height: 580px">
-                <img src="13.png" alt="" class="gallery">
-            </div>
-            <div class="gallery-box" style="height: 560px">
-                <img src="12.png" alt="" class="gallery">
-            </div>
-            <div class="gallery-box" style="height: 590px">
-                <img src="11.png" alt="" class="gallery">
-            </div>
-            <div class="gallery-box" style="height: 570px">
-                <img src="10.png" alt="" class="gallery">
-            </div>
-            <div class="gallery-box" style="height: 590px">
-                <img src="9.png" alt="" class="gallery">
-            </div>
-            <div class="gallery-box" style="height: 600px">
-                <img src="8.png" alt="" class="gallery">
-            </div>
-            <div class="gallery-box" style="height: 740px">
-                <img src="7.png" alt="" class="gallery">
-            </div>
-            <div class="gallery-box" style="height: 610px">
-                <img src="6.png" alt="" class="gallery">
-            </div>
-            <div class="gallery-box" style="height: 600px">
-                <img src="5.png" alt="" class="gallery">
-            </div>
-            <div class="gallery-box" style="height: 590px">
-                <img src="4.png" alt="" class="gallery">
-            </div>
-            <div class="gallery-box" style="height: 580px">
-                <img src="3.png" alt="" class="gallery">
-            </div>
-            <div class="gallery-box" style="height: 570px">
-                <img src="2.png" alt="" class="gallery">
-            </div>
-            <div class="gallery-box" style="height: 650px">
-                <img src="1.png" alt="" class="gallery">
-            </div>
-        </div>
-
-        <div id="factions" style="display: none;">
-            <h1>GRU Division "P"</h1>
-            <div class="about-box">
-            <div class="gru-cover">
-            > It's 1982, dusting the world with Cold War, breeze falling in between the world, falling together, within the destiny of absolute War. 
-            <br>> GRU-P is a specialized Russian Forces which was created to serve as Elite Forces and cooperation between Soviet Union and <br>Countries affiliated in World War 2. 
-            Although, as the World War 2 faded and world coming back together, countries like America <br>and Russia did not get along well. <br>Due to this, the group changed it's purpose as Main Intelligence, Special Forces and External Relations serving as Counterpart <br>for those countries. 
-            <br>> GRU-P has gained a lot of interests into Facility: Black Dagger due to it's environmental experiments and overall recourses <br>which is good advantage for positive results regarding Soviet Union. 
-            <img src="gruico.png" alt="" class="gru-icon">
-            </div>
-            </div>
-            <div class="archive-box"><a href="https://discord.gg/gBA2d49TbY">Join Here</a></div>
-            <br>
-            <br>
-
-            <h1>Anderson Robotics</h1>
-            <div class="about-box">
-            <div class="anderson-cover">
-            > Anderson Robotics (AR) is a cutting-edge Group of Interest (GoI) specializing in the development, production, <br>and sale of advanced robotics, cybernetics, and artificial intelligence. Known for its sleek, high-performance <br>technology and ethical (or ethically ambiguous) business practices, AR caters to a diverse clientele. 
-            <br> We pride ourselves on innovation and pushing the boundaries of what's possible in the world of robotics. 
-            <br> <br>
-            <h3> What we offer:</h3>
-            
-            > Advanced Technological Development
-            <br>> Dynamic and Innovative Projects
-            <br>> Opportunities for Creative Engineering and Scientific Exploration
-            <br>> Engaging Roleplay Scenarios
-            <br>> A community focused on the advancement of robotics and AI.
-            <br>
-            <br>
-            <h3>Divisions:</h3>
-            > Research & Development (R&D) Division: The heart of AR, focused on creating and refining <br>groundbreaking technologies
-            <br>> Merchant Division: The business arm of AR, handling negotiations, contracts, and sales
-            <br>> Security & Enforcement Division: Responsible for protecting AR's assets and personnel, <br>this division also handles deployment and security contracts
-            <br>> Cybernetic Division: Comprised of advanced robotic entities and cybernetically enhanced <br>individuals, this division showcases the pinnacle of AR's technological capabilities
-            <br>
-            <br>
-
-            <h3>Current Projects:</h3>
-            > Development of next-generation AI interfaces
-            <br>> Advancement in cybernetic augmentation technology
-            <br>> Expansion of our robotic security systems
-            <br>> Research into new energy sources for robotic applications 
-            <img src="ar.png" alt="" class="anderson-icon">
-            </div>
-            </div>
-            
-            <div class="archive-box"><a href="https://discord.gg/zhZTTdZbDA">Join Here</a></div>
-            <br>
-            <br>
-        </div>
-    </div>  
+        inputField.addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                let command = inputField.value.trim().toLowerCase();
+                inputField.value = '';
+                
+                outputDiv.innerHTML += '\n> ' + command + '\n';
+                
+                if (database[command]) {
+                    outputDiv.innerHTML += database[command] + '\n';
+                } else {
+                    outputDiv.innerHTML += 'Command not recognized.\n';
+                }
+                
+                outputDiv.innerHTML += '\n';
+                outputDiv.scrollTop = outputDiv.scrollHeight;
+            }
+        });
+    </script>
 </body>
 </html>
