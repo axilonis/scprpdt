@@ -36,60 +36,8 @@
     </style>
 </head>
 <body>
-    <div id="output">Microsoft SCP:RP Database Terminal Disk Operating System [Version TEST 1.27.1.80] <br>(c) Anderson Robotics Corporation. All rights reserved. <br>
+    <div id="output">Microsoft SCP:RP Database Terminal Disk Operating System [Version NULL 0.00.0.80] <br>(c) Anderson Robotics Corporation. All rights reserved. <br>
+        System is underground an encrypted classification protocol. Please be patient and check again in a few days.
 
-Available Commands:                                                                              Available Databases:
-inbox = update-log/pending messages                                                              type-site    | Facility-03 "Black Dagger"     = fbg
-info = shows you information about a specific database                                           type-faction | Anderson Robotics              = ar
-depth = shows you even more about a specific subdata
-archive = shows you all available documents of a specific database
-div = shows you all the available departments/divisions of a specific database
-ally = shows you all available allied/associated sites/factions of a specific database
-soc = shows you all available socials of a specific database
-
-Default Command Format: [command] [database]
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-</div>
-    <div id="input-line"><span id="prompt">C:\\Users\\LocalAccount&gt; </span><input id="input" autofocus></div>
-
-    <script>
-        const database = {
-            'inbox fbg': '(!) 07/04/2025 19:00 UTC | Testing Phase for SCPRPDT has begun - Mess around and offer me (axilonis) feedback about what you would like to be changed/added.',
-            'info fbg': '<br>---SITE INFORMATION---<br>Statute of NAAD                        https://docs.google.com/document/d/1BHoKZdijqbHUKskOg1IusZm3b2DdAvY6FfOdwmYaQ7g/edit?usp=sharing<br>Facility-03 Coded Protocols            https://docs.google.com/document/d/1Yotf0Qvz3w4zLcxctTrUV4-tS_0t9b8ZZ8RZzjfXGCE/edit?usp=sharing<br>Facility-03 Roleplay Information       https://docs.google.com/document/d/1UPPsdxZIfidxagQFAUmpAWvO5TZLJcHi5MY9w_wRa3Y/edit?usp=drivesdk<br>Facility-03 Lore Information 1         https://docs.google.com/document/d/1UPPsdxZIfidxagQFAUmpAWvO5TZLJcHi5MY9w_wRa3Y/edit?tab=t.vaqgwhaqxfmv<br>Facility-03 Lore Information 2         https://docs.google.com/document/d/17aZxqbcb1LMCNMHT5QtCIA-hZSRk-kmTmKcbBsRCGzc/edit?usp=sharing',
-            'archive fbg': '<br>---ANOMALIES---<br>AN-166                                 https://docs.google.com/document/d/12VybqqF3xk2DanUEfqWNz_ztWKaKMWZp0GFiPKzV3p4/edit<br>AN-027                                 https://docs.google.com/document/d/1d9pePwGj_qnTRgbTVn2Xy4RD10NyVH2eIP4IzNHhoOI/edit?usp=drivesdk<br>SCP-049                                https://docs.google.com/document/d/1bS1zI0Ol5IKXQCp8vlohgJRv6rT-dxao/edit?usp=sharing&ouid=101609366160739451702&rtpof=true&sd=true<br>AN-006                                 https://docs.google.com/document/d/17w2AvvWGPkdepn8uZ_lYpf1tkRuU5smAquuFNqTtebM/edit?usp=drivesdk<br>AN-584                                 https://docs.google.com/document/d/1hLHrfHHu7S9qTZw-z80II65Pt4fk4MbqNs6yLJyQYKc/edit?usp=sharing<br>AN-139                                 https://docs.google.com/document/d/1Mtl-c6WYKndowz5cANh11dgKrj_AQ2-E_EJ63U2bUfo/edit?usp=sharing<br>AN-821                                 https://docs.google.com/document/d/1nYEpV533yCREmKI-sem4Z95Ti0A-myCx4Cfef6ZElpM/edit?usp=sharing<br>AN-044                                 https://docs.google.com/document/d/1WGZA4sQyZsM5g1pq6EERnOMg-_tkqSZIMjnXYeqDHlo/edit?usp=drivesdk<br>AN-019                                 https://docs.google.com/document/d/14rEla0zQv2hOaLdAcmpbNmz6XKu49cHDfojwlF-5Sqg/edit?usp=drivesdk<br>AN-498                                 https://docs.google.com/document/d/1yjdk95cKnsu9zYv9q4I1dppcyRy92x10RrVLwpAPY7s/edit?usp=drivesdk<br>AN-101                                 https://docs.google.com/document/d/1Sk8p2Hcj5-BOAhjW-JEd-KfUMHv6WIf3Uyw5wl3FyrQ/edit?usp=drivesdk<br><br>---PERSONNEL---<br>Melvin Français                        https://docs.google.com/document/d/1PHCOV9DbfEK9WlsyBQqPfXS0ks_SZShEBuKiyIAdZps/edit?usp=sharing<br>Issah A. Eisenhower                    https://docs.google.com/document/d/1XDTfrmQuS8IByplhm4kK4vsnPv1lTydvAKjtVT9V_SI/edit?usp=drivesdk<br>Cole Matthews                          https://docs.google.com/document/d/11AHHWUDzvvs5enapDKJ2PQcjwMFHDUo6zT3hS2CzUTU/edit?tab=t.0<br>Andrei Mihai Povaliceanu               https://docs.google.com/document/d/1O-qucMfyPtPdYwM9ggEySGHfCavF_SCIMM_UfOlYCmc/edit?usp=drivesdk',
-            'div fbg':'<br>---HOSTILES---<br>[TS] Test Subjects<br><br>---COMBATANTS---<br>[SCED] Security & Containment Enforcement Division<br>[SRRF] Specialized Counter-Anomaly Rapid Response & Enforcement Detachment<br><br>---PERSONNEL---<br>[RT] Research & Technology<br>[HTS] Health & Trauma Services<br>[MS] Maintenance & Supply<br>[FMS] Facility Management Staff<br>[BFA] Board of Facility Administration<br><br>(!) You may view these subdatas (!)<br>Subdata Command Format: depth [subdata-database]',
-            'ally fbg':'Anderson Robotics<br>GRU Division “P”<br>Nu-7 "Hammer Down"',
-            'soc fbg':'Discord Server                https://discord.gg/kSyrX5cjXM<br>Faction Hub                   https://discord.gg/eAPUcB7Gp8<br>TS Server                     https://discord.gg/n8J35Zz6KM<br>SCED Server                   https://discord.gg/5KcjqDfFza<br>SCARRED Server                https://discord.gg/5KcjqDfFza<br>ACNS Server                   https://discord.gg/MRnjMtE8aS<br>HTS Server                    https://discord.gg/unZ25GZNay<br>FETS Server                   https://discord.gg/mYdvQr87vu<br>FMS Server                    https://discord.gg/Ng8e6PYVPq<br>Anderson Robotics             https://discord.gg/RpJ5b6Sgd4<br>GRU Division “P”              https://discord.gg/bqt2rE8qnf<br>Nu-7 "Hammer Down"            https://discord.gg/8ypwAcjzMM',
-            'depth ts-fbg':'Test subjects are, like the name suggests, the ones that will be used to test anomalies or do labor which has a high risk of killing EDCE personnel.<br>They know of their past, taken from prisons, either death row or without people that will miss them - This often makes them very volatile, so SCED is always allowed to use force.<br>Most ethical rules do not apply to them',
-            'depth sced-fbg':'So far the most popular department, they are general facility guards that ensure everything goes smoothly without issues<br>They are usually stationed at either checkpoints, TSC, or patrolling the hallways<br>They have full permission to use lethal force if anything threatens the safety of other personnel',
-            'depth srrf-fbg':'SRRF are the equivalent of MTF, the only difference being is that they are permanently stationed at the site<br>They are usually equipped with heavy weaponry, and they will respond to any disruptencies or threats in the facility as quick as possible<br>Rarely seen in TSC',
-            'depth rt-fbg':'They are the researchers that conduct tests and contain anomalies<br>Their primary objective is to find ways to neutralize anomalies<br>They are not allowed to get past the stairs in TSC without a good reason',
-            'depth hts-fbg':'They are pretty much doctors and nurses<br>They are the ones who give out amnestics<br>They are allowed to conduct check-ups on personnel and give them medical assistance<br>They are not allowed to get past the stairs in TSC without a good reason',
-            'depth ms-fbg':'They are the facility engineers who repair broken objects<br>They are not allowed to get past the stairs in TSC without a good reason',
-            'depth fms-fbg':'They are the facility managers who supervise everything and manage things, not to be confused with BFA<br>They are the ones who raise alarms, make announcements, etc<br>Lower rank than BFA',
-            'depth bfa-fbg':'They are the facility administrators who supervise everything and make all decisions<br>They are the ones who raise alarms, make announcements, etc<br>They have full power and permission over everything',
-        };
-
-        const outputDiv = document.getElementById('output');
-        const inputField = document.getElementById('input');
-
-        inputField.addEventListener('keypress', function(event) {
-            if (event.key === 'Enter') {
-                let command = inputField.value.trim().toLowerCase();
-                inputField.value = '';
-                
-                outputDiv.innerHTML += '\n> ' + command + '\n';
-                
-                if (database[command]) {
-                    outputDiv.innerHTML += database[command] + '\n';
-                } else {
-                    outputDiv.innerHTML += 'Command not recognized.\n';
-                }
-                
-                outputDiv.innerHTML += '\n';
-                outputDiv.scrollTop = outputDiv.scrollHeight;
-            }
-        });
-    </script>
 </body>
 </html>
