@@ -36,8 +36,106 @@
     </style>
 </head>
 <body>
-    <div id="output">Microsoft SCP:RP Database Terminal Disk Operating System [Version NULL 0.00.0.80] <br>(c) Anderson Robotics Corporation. All rights reserved. <br>
-System is undergoing an encrypted classification protocol. Please be patient and check again in a few days.
+    <div id="output">Microsoft SCP:RP Database Terminal Disk Operating System [Version LOGIN 1.27.1.80] <br>(c) Anderson Robotics Corporation. All rights reserved. <br>
 
+Please login into your preferred database.
+
+</div>
+    <div id="input-line"><span id="prompt">C:\Users\LocalAccount&gt; </span><input id="input" autofocus></div>
+
+    <script>
+        const database = {
+            'databases': 'Facility-03 Black Dagger      = fbg',
+            'help': 'basic command format: [command]<br>depth command format: depth [abreviation-of-subdata] (you will be notified if one of the normal commands executed has viewable subdatas. the subdata abreviations will be mentioned before every subdata, and they will be written inbetween right brackets)<br>login command format: login [database]<br>view command format: view [dir file]<br><br>view a detailed guide here: <br><br>view a detailed guide here: https://youtu.be/yWZQgKIc0l4?si=KU3GWa1ibJDWmW9G',
+            'cmds': 'databases = shows you all available databases you can login to<br>help = shows you a simple guide on how to use commands and navigate the program<br>login = login into your preferred database',        
+        };
+
+            const outputDiv = document.getElementById('output');
+            const inputField = document.getElementById('input');
+
+            inputField.addEventListener('keypress', function(event) {
+                if (event.key === 'Enter') {
+                    let command = inputField.value.trim().toLowerCase();
+                    inputField.value = '';
+
+                    outputDiv.innerHTML += '\n> ' + command + '\n';
+
+                    if (command === 'login fbg') {
+                        const lines = [
+                            'Tracing route to external servers...',
+                            '[yqo.80] - OK',
+                            '[ygo.80] - OK',
+                            '[ywo.80] - OK',
+                            'Running diagnostics...',
+                            'Local IP Adress - OK',
+                            'Local Nodes - OK',
+                            'Analysing System...',
+                            'Host Name:                         LOCALACCOUNT',  
+                            'OS Name:                           Microsoft Windows 98 First Edition',  
+                            'OS Version:                        5.10.1112 A',  
+                            'OS Manufacturer:                   Microsoft Corporation',  
+                            'OS Configuration:                  Anderson Robotics Workstation',
+                            'OS Build Type:                     Multiprocessor Free',  
+                            'Registered Owner:                  John Security',  
+                            'Registered Organization:           North Atlantic Anomaly Defense',  
+                            'Product ID:                        28436-AR-1381272-10239',  
+                            'Original Install Date:             1982-03-09, 2:14:01 PM',  
+                            'System Boot Time:                  1982-04-19, 7:15:39 PM',
+                            'System Manufacturer:               Anderson Robotics',  
+                            'System Model:                      TheC-All AR200'  ,
+                            'System Type:                       X86-based PC'  ,
+                            'Processor(s):                      1 Processor(s) Installed.',
+                            '                                   [01]: x86 Family 5 Model 2 Stepping 12 GenuineIntel ~133 Mhz'  ,
+                            'BIOS Version:                      Anderson Robotics Custom 1.00.07.DQ0T' , 
+                            'Windows Directory:                 C:\\WINDOWS'  ,
+                            'System Directory:                  C:\\WINDOWS\\SYSTEM'  ,
+                            'Boot Device:                       \\Device\\HarddiskVolume1'  ,
+                            'System Locale:                     en-us;English (United States)'  ,
+                            'Input Locale:                      en-us;English (United States)' ,
+                            'Time Zone:                         (GMT+02:00) ',
+                            'Total Physical Memory:             64 MB'  ,
+                            'Available Physical Memory:         23 MB'  ,
+                            'Virtual Memory: Max Size:          128 MB'  ,
+                            'Virtual Memory: Available:         74 MB'  ,
+                            'Virtual Memory: In Use:            54 MB'  ,
+                            'Page File Location(s):             C:\\WIN386.SWP'  ,
+                            'Domain:                            LOCALACCOUNT'  ,
+                            'Logon Server:                      \\LocalAccount'  ,
+                            'Hotfix(s):                         None detected'  ,
+                            'Network Card(s):                   1 NIC(s) Installed.'  ,
+                            '                                   [01]: 3Com EtherLink III ISA (3C509b-TPO)'  ,
+                            '                                         Connection Name: Local Area Connection'  ,
+                            '                                         DHCP Enabled:    No'  ,
+                            '                                         IP address(es)'  ,
+                            '                                         [01]: CENSORED IPv4'  ,
+                            '                                         [02]: CENSORED IPv6',
+                            '',
+                            '',
+
+                            'Connection to endpoint established. Please access this link: https://axilonis.github.io/blackdaggerdatabase'
+                        ];
+
+                        let index = 0;
+                        const interval = setInterval(() => {
+                            outputDiv.innerHTML += lines[index] + '\n';
+                            outputDiv.scrollTop = outputDiv.scrollHeight;
+                            index++;
+                            if (index >= lines.length) {
+                                clearInterval(interval);
+                                outputDiv.innerHTML += '\n';
+                            }
+                        }, 50);
+
+                    } else if (database[command]) {
+                        outputDiv.innerHTML += database[command] + '\n\n';
+                    } else {
+                        outputDiv.innerHTML += 'Command not recognized.\n\n';
+                    }
+
+                    outputDiv.scrollTop = outputDiv.scrollHeight;
+                }
+            });
+
+    </script>
 </body>
 </html>
